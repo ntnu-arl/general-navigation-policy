@@ -1,0 +1,69 @@
+# skrl 2 agent config matching arbitrary_sensor_setup_pretrained.pt
+# Source: logs/skrl/arbitrary_sensor_setup/2026-10-04_12-59-36_ppo_torch/checkpoints/best_agent.pt
+# (Lab3 / skrl2 spherical_range_cnn_gru, seed 47, 2M steps).
+seed: 47
+
+models:
+  separate: False
+  use_spherical_range_cnn_gru: true
+  policy:
+    class: GaussianMixin
+    clip_actions: False
+    clip_log_std: True
+    min_log_std: -20.0
+    max_log_std: 2.0
+    initial_log_std: 0.0
+    kwargs:
+      range_H: 90
+      range_W: 45
+      image_channels: 2
+      use_mask_channel: true
+      initial_log_std: 0.0
+      sequence_length: 32
+      pretrained_encoder_path: null
+      freeze_encoder: false
+      mask_loss_scale: 1.0
+  value:
+    kwargs: {}
+
+memory:
+  class: RandomMemory
+  memory_size: -1
+
+agent:
+  class: PPO_RNN
+  rollouts: 32
+  aux_recon_loss_scale: 1.5
+  learning_epochs: 5
+  mini_batches: 16
+  discount_factor: 0.99
+  gae_lambda: 0.95
+  learning_rate: 3.0e-04
+  learning_rate_scheduler: KLAdaptiveLR
+  learning_rate_scheduler_kwargs:
+    kl_threshold: 0.008
+  observation_preprocessor: null
+  observation_preprocessor_kwargs: null
+  value_preprocessor: RunningStandardScaler
+  value_preprocessor_kwargs: null
+  random_timesteps: 0
+  learning_starts: 0
+  grad_norm_clip: 0.5
+  ratio_clip: 0.2
+  value_clip: 0.2
+  entropy_loss_scale: 0.02
+  value_loss_scale: 0.5
+  kl_threshold: 0.0
+  rewards_shaper_scale: 0.6
+  time_limit_bootstrap: False
+  experiment:
+    directory: "pretrained"
+    experiment_name: "arbitrary_sensor_setup_pretrained"
+    write_interval: 100
+    checkpoint_interval: 0
+
+trainer:
+  class: SequentialTrainer
+  timesteps: 2000000
+  environment_info: log
+  close_environment_at_exit: false

@@ -1,0 +1,25 @@
+# BSD 3-Clause License — Copyright (c) 2026, NTNU Autonomous Robots Lab
+# Compose override for General Navigation Policy.
+# Merged into Isaac Lab's docker-compose via: ./docker/run.sh start
+#
+# GNP_HOST_PATH is set by docker/run.sh. The Lab base image (isaac-lab-base)
+# must already exist; run.sh builds it first when missing.
+#
+# GPU note: keep X11 forwarding OFF for long-lived train containers (that was
+# the EPERM trigger). Driver capabilities can stay broad for RTX/NGX quality;
+# avoid mounting /tmp/.X11-unix / DISPLAY rather than stripping capabilities.
+
+services:
+  isaac-lab-base:
+    build:
+      context: ${GNP_HOST_PATH}
+      dockerfile: docker/Dockerfile.gnp
+      args:
+        BASE_IMAGE: isaac-lab-base${DOCKER_NAME_SUFFIX:-}
+    image: isaac-lab-gnp${DOCKER_NAME_SUFFIX:-}
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - type: bind
+        source: ${GNP_HOST_PATH}
+        target: /workspace/general_navigation_policy

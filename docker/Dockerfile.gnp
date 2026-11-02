@@ -1,0 +1,21 @@
+# BSD 3-Clause License — Copyright (c) 2026, NTNU Autonomous Robots Lab
+# Extends the Isaac Lab base image with GNP + skrl.
+# Built via ./docker/run.sh (compose.gnp.yaml). Requires image `isaac-lab-base` first.
+
+ARG BASE_IMAGE=isaac-lab-base
+FROM ${BASE_IMAGE}
+
+ARG GNP_PATH=/workspace/general_navigation_policy
+ENV GNP_PATH=${GNP_PATH}
+
+USER root
+COPY --chown=isaaclab:isaaclab . ${GNP_PATH}
+
+USER isaaclab
+WORKDIR ${GNP_PATH}
+
+# Use Isaac Lab's Python so packages land in the same env as the simulator.
+RUN /workspace/isaaclab/isaaclab.sh -p -m pip install --no-cache-dir -e "${GNP_PATH}" \
+ && /workspace/isaaclab/isaaclab.sh -p -m pip install --no-cache-dir "skrl>=2.1.0"
+
+WORKDIR /workspace/isaaclab

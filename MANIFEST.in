@@ -1,0 +1,3 @@
+# Include non-Python package data required at runtime (Hydra / Isaac Lab agent YAMLs).
+recursive-include general_navigation_policy *.yaml *.yml
+global-exclude __pycache__ *.py[cod]

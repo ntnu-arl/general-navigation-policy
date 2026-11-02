@@ -1,0 +1,14 @@
+# Keep the Docker build context small (runtime still bind-mounts the full repo).
+.git
+.gitignore
+**/__pycache__
+**/*.py[cod]
+**/*.egg-info
+logs/
+outputs/
+trained_models/
+.recovery/
+.venv*/
+**/.pytest_cache/
+**/.ruff_cache/
+docker/.isaac-lab-docker-history
