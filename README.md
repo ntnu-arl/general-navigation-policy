@@ -59,10 +59,8 @@ container, not from these capabilities.
 
 ```bash
 ./docker/run.sh viz --gpus device=2
-# drops into bash (not Isaac Streaming). Then:
-HEADLESS=1 isaaclab -p scripts/visualize_trajectories.py \
-  --checkpoint pretrained/arbitrary_sensor_setup_pretrained.pt \
-  --active_cameras random --device cuda:0
+# drops into bash (not Isaac Streaming). Then run play/eval with --device cuda:0
+# (mapped GPU appears as cuda:0 inside the sidecar).
 ```
 
 - Opt into X11 on the train container only when you need a Kit window:
@@ -90,13 +88,7 @@ HEADLESS=1 isaaclab -p scripts/evaluate_skrl.py \
   --task Isaac-Arbitrary-Sensor-Setup-ARL-Robot-1-Play-v0 \
   --model spherical_range_cnn_gru \
   --checkpoint pretrained/arbitrary_sensor_setup_pretrained.pt
-
-HEADLESS=1 isaaclab -p scripts/visualize_trajectories.py \
-  --checkpoint pretrained/arbitrary_sensor_setup_pretrained.pt \
-  --active_cameras random --device cuda:0
 ```
-
-Trajectory plots land under host-visible `outputs/analysis/` (plus stable `latest` copies).
 
 Isaac Lab 3.0 removed ``--headless``; use ``HEADLESS=1`` (or omit a Kit visualizer). Do **not** set `CUDA_VISIBLE_DEVICES` with Kit — use `--device cuda:N` instead.
 
