@@ -114,7 +114,10 @@ run_viz_sidecar() {
   local gpu_arg="--gpus"
   local gpu_val="device=${GNP_VIZ_GPU:-2}"
   local -a docker_args=()
-  local -a cmd=("bash")
+  # Empty by default: --entrypoint bash with no args gives an interactive shell.
+  # Do NOT pass a trailing "bash" — that becomes `bash bash` and fails with
+  # "/usr/bin/bash: cannot execute binary file".
+  local -a cmd=()
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -176,7 +179,11 @@ run_viz_sidecar() {
     echo "[WARN] isaac-lab-base not running; sidecar mounts only the GNP repo bind."
   fi
 
-  exec docker run "${docker_args[@]}" "${GNP_IMAGE}" "${cmd[@]}"
+  if ((${#cmd[@]})); then
+    exec docker run "${docker_args[@]}" "${GNP_IMAGE}" "${cmd[@]}"
+  else
+    exec docker run "${docker_args[@]}" "${GNP_IMAGE}"
+  fi
 }
 
 echo "[INFO] Isaac Lab: ${ISAACLAB_ROOT}"
