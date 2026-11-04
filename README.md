@@ -1,7 +1,7 @@
 # General Navigation Policy
 
 <div align="center">
-  <a href="https://ntnu-arl.github.io/GenNavPolicy/"><img src="https://img.shields.io/badge/Homepage-1E88E5?style=flat-square" alt="Webpage"></a>
+  <a href="https://ntnu-arl.github.io/GenNavPolicy/"><img src="https://img.shields.io/badge/Project_Page-1E88E5?style=flat-square" alt="Project Page"></a>
   <a href="https://arxiv.org/abs/2610.08306"><img src="https://img.shields.io/badge/arXiv-78909C?style=flat-square" alt="arXiv"></a>
   <a href="https://www.youtube.com/watch?v=LLvyCoh5PL0"><img src="https://img.shields.io/badge/YouTube-E57373?style=flat-square" alt="YouTube"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-BSD--3--Clause-blue?style=flat-square" alt="License: BSD-3-Clause"></a>
