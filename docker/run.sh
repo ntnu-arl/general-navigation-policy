@@ -190,11 +190,11 @@ echo "[INFO] Isaac Lab: ${ISAACLAB_ROOT}"
 echo "[INFO] GNP mount: ${GNP_ROOT} -> /workspace/general_navigation_policy"
 export GNP_HOST_PATH="${GNP_ROOT}"
 
-# Container UID often differs from the host mount owner; keep a world-writable
-# outputs/ tree so viz/eval artifacts land on the bind (host-visible).
+# Container UID often differs from the host mount owner; keep world-writable
+# outputs/ and logs/ trees so train/viz artifacts land on the bind (host-visible).
 ensure_host_outputs_dir() {
-  mkdir -p "${GNP_ROOT}/outputs/analysis"
-  chmod 777 "${GNP_ROOT}/outputs" "${GNP_ROOT}/outputs/analysis" 2>/dev/null || true
+  mkdir -p "${GNP_ROOT}/outputs/analysis" "${GNP_ROOT}/logs"
+  chmod 777 "${GNP_ROOT}/outputs" "${GNP_ROOT}/outputs/analysis" "${GNP_ROOT}/logs" 2>/dev/null || true
 }
 
 case "${CMD}" in

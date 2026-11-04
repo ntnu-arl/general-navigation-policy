@@ -57,9 +57,11 @@ See the [project page](https://ntnu-arl.github.io/GenNavPolicy/) for figures, qu
 │   ├── play_skrl.py           # interactive / headless rollout
 │   └── evaluate_skrl.py       # crash / success metrics
 ├── general_navigation_policy/
-│   ├── tasks/                 # Gym envs, MDP terms, metrics
-│   │   └── arbitrary_sensor_setup/
-│   └── learning/skrl/         # models, custom PPO-RNN, trainers
+│   ├── tasks/
+│   │   ├── arbitrary_sensor_setup/  # Gym env + agents
+│   │   ├── mdp/                     # actions, rewards, events, observations
+│   │   └── metrics.py
+│   └── learning/skrl/               # models, custom PPO-RNN, trainers
 ├── pretrained/
 │   ├── arbitrary_sensor_setup_pretrained.pt
 │   ├── agent.yaml
