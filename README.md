@@ -1,4 +1,4 @@
-# General Navigation Policy
+# Sensor-Layout-Agnostic Navigation via Geometric Observation Canonicalization
 
 <div align="center">
   <a href="https://ntnu-arl.github.io/GenNavPolicy/"><img src="https://img.shields.io/badge/Project_Page-1E88E5?style=flat-square" alt="Project Page"></a>
